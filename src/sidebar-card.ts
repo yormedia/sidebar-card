@@ -19,7 +19,7 @@ import { css, html, LitElement } from 'lit-element';
 import { moreInfo } from 'card-tools/src/more-info';
 import { hass, provideHass } from 'card-tools/src/hass';
 import { subscribeRenderTemplate } from 'card-tools/src/templates';
-import moment from 'moment/min/moment-with-locales';
+const moment = require('moment/min/moment-with-locales');
 import { forwardHaptic, navigate, toggleEntity } from 'custom-card-helpers';
 
 // ##########################################################################################
@@ -43,6 +43,7 @@ class SidebarCard extends LitElement {
   period = false;
   date = false;
   dateFormat = 'DD MMMM';
+  topCard: any = null;
   bottomCard: any = null;
   CUSTOM_TYPE_PREFIX = 'custom:';
 
@@ -82,6 +83,7 @@ class SidebarCard extends LitElement {
     this.period = this.config.period ? this.config.period : false;
     this.date = this.config.date ? this.config.date : false;
     this.dateFormat = this.config.dateFormat ? this.config.dateFormat : 'DD MMMM';
+    this.topCard = this.config.topCard ? this.config.topCard : null;
     this.bottomCard = this.config.bottomCard ? this.config.bottomCard : null;
 
     return html`
@@ -121,6 +123,11 @@ class SidebarCard extends LitElement {
               <h2 class="date"></h2>
             `
           : html``}
+          ${this.bottomCard
+            ? html`
+                <div class="bottom"></div>
+              `
+            : html``}
         ${sidebarMenu && sidebarMenu.length > 0
           ? html`
               <ul class="sidebarMenu">
@@ -324,6 +331,46 @@ class SidebarCard extends LitElement {
         }
       }, 2);
     }
+
+    if (this.topCard) {
+      setTimeout(() => {
+        var card = {
+          type: this.topCard.type,
+        };
+        card = Object.assign({}, card, this.topCard.cardOptions);
+        log2console('firstUpdated', 'Bottom card: ', card);
+        if (!card || typeof card !== 'object' || !card.type) {
+          error2console('firstUpdated', 'Bottom card config error!');
+        } else {
+          let tag = card.type;
+          if (tag.startsWith(this.CUSTOM_TYPE_PREFIX)) tag = tag.substr(this.CUSTOM_TYPE_PREFIX.length);
+          else tag = `hui-${tag}-card`;
+
+          const cardElement = document.createElement(tag);
+          cardElement.setConfig(card);
+          cardElement.hass = hass();
+
+          var bottomSection = this.shadowRoot.querySelector('.bottom');
+          bottomSection.appendChild(cardElement);
+          provideHass(cardElement);
+
+          if (this.topCard.cardStyle && this.topCard.cardStyle != '') {
+            let style = this.topCard.cardStyle;
+            let itterations = 0;
+            let interval = setInterval(function() {
+              if (cardElement && cardElement.shadowRoot) {
+                window.clearInterval(interval);
+                var styleElement = document.createElement('style');
+                styleElement.innerHTML = style;
+                cardElement.shadowRoot.appendChild(styleElement);
+              } else if (++itterations === 10) {
+                window.clearInterval(interval);
+              }
+            }, 100);
+          }
+        }
+      }, 2);
+    }
   }
 
   _updateActiveMenu() {
@@ -429,6 +476,8 @@ class SidebarCard extends LitElement {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
         position: fixed;
         width: 0;
       }
