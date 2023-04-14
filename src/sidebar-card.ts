@@ -123,9 +123,9 @@ class SidebarCard extends LitElement {
               <h2 class="date"></h2>
             `
           : html``}
-          ${this.bottomCard
+          ${this.topCard
             ? html`
-                <div class="bottom"></div>
+                <div class="top"></div>
               `
             : html``}
         ${sidebarMenu && sidebarMenu.length > 0
@@ -338,9 +338,9 @@ class SidebarCard extends LitElement {
           type: this.topCard.type,
         };
         card = Object.assign({}, card, this.topCard.cardOptions);
-        log2console('firstUpdated', 'Bottom card: ', card);
+        log2console('firstUpdated', 'Top card: ', card);
         if (!card || typeof card !== 'object' || !card.type) {
-          error2console('firstUpdated', 'Bottom card config error!');
+          error2console('firstUpdated', 'Top card config error!');
         } else {
           let tag = card.type;
           if (tag.startsWith(this.CUSTOM_TYPE_PREFIX)) tag = tag.substr(this.CUSTOM_TYPE_PREFIX.length);
@@ -350,8 +350,8 @@ class SidebarCard extends LitElement {
           cardElement.setConfig(card);
           cardElement.hass = hass();
 
-          var bottomSection = this.shadowRoot.querySelector('.bottom');
-          bottomSection.appendChild(cardElement);
+          var topSection = this.shadowRoot.querySelector('.top');
+          topSection.appendChild(cardElement);
           provideHass(cardElement);
 
           if (this.topCard.cardStyle && this.topCard.cardStyle != '') {
@@ -649,6 +649,10 @@ class SidebarCard extends LitElement {
         z-index: 1;
       }
 
+      .top {
+        display: flex;
+        margin-top: auto;
+      }
       .bottom {
         display: flex;
         margin-top: auto;
