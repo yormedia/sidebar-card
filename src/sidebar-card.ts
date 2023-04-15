@@ -19,7 +19,8 @@ import { css, html, LitElement } from 'lit-element';
 import { moreInfo } from 'card-tools/src/more-info';
 import { hass, provideHass } from 'card-tools/src/hass';
 import { subscribeRenderTemplate } from 'card-tools/src/templates';
-const moment = require('moment/min/moment-with-locales');
+import * as moment_ from 'moment';
+const moment = moment_;
 import { forwardHaptic, navigate, toggleEntity } from 'custom-card-helpers';
 
 // ##########################################################################################
