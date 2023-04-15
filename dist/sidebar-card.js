@@ -185,9 +185,6 @@ i.version="2.29.4",s(Jn),i.fn=dr,i.min=ei,i.max=ti,i.now=ni,i.utc=m,i.unix=cr,i.
         ${this.date?W`
               <h2 class="date"></h2>
             `:W``}
-          ${this.topCard?W`
-                <div class="top"></div>
-              `:W``}
         ${e&&e.length>0?W`
               <ul class="sidebarMenu">
                 ${e.map((e=>W`
@@ -410,6 +407,7 @@ i.version="2.29.4",s(Jn),i.fn=dr,i.min=ei,i.max=ti,i.now=ni,i.utc=m,i.unix=cr,i.
         display: flex;
         margin-top: auto;
       }
+      
       .bottom {
         display: flex;
         margin-top: auto;

@@ -124,11 +124,6 @@ class SidebarCard extends LitElement {
               <h2 class="date"></h2>
             `
           : html``}
-          ${this.topCard
-            ? html`
-                <div class="top"></div>
-              `
-            : html``}
         ${sidebarMenu && sidebarMenu.length > 0
           ? html`
               <ul class="sidebarMenu">
@@ -652,6 +647,7 @@ class SidebarCard extends LitElement {
         display: flex;
         margin-top: auto;
       }
+      
       .bottom {
         display: flex;
         margin-top: auto;
