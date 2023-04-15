@@ -235,8 +235,6 @@ i.version="2.29.4",s(Jn),i.fn=dr,i.min=ei,i.max=ti,i.now=ni,i.utc=m,i.unix=cr,i.
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        align-items: center;
-        justify-content: center;
         position: fixed;
         width: 0;
       }
