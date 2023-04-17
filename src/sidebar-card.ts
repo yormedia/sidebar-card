@@ -124,6 +124,11 @@ class SidebarCard extends LitElement {
               <h2 class="date"></h2>
             `
           : html``}
+          ${this.topCard
+            ? html`
+                <div class="top"></div>
+              `
+            : html``}
         ${sidebarMenu && sidebarMenu.length > 0
           ? html`
               <ul class="sidebarMenu">
@@ -473,8 +478,8 @@ class SidebarCard extends LitElement {
         flex-direction: column;
         box-sizing: border-box;
         position: fixed;
-        width: 0;
       }
+
       .sidebarMenu {
         list-style: none;
         margin: 20px 0;
@@ -528,15 +533,18 @@ class SidebarCard extends LitElement {
         font-size: 60px;
         line-height: 60px;
         cursor: default;
+        text-align: center;
       }
       h1.digitalClock.with-seconds {
         font-size: 48px;
         line-height: 48px;
         cursor: default;
+        text-align: center;
       }
       h1.digitalClock.with-title {
         margin-bottom: 0;
         cursor: default;
+        text-align: center;
       }
       h2 {
         margin: 0;

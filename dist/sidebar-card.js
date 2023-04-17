@@ -185,6 +185,9 @@ i.version="2.29.4",s(Jn),i.fn=dr,i.min=ei,i.max=ti,i.now=ni,i.utc=m,i.unix=cr,i.
         ${this.date?W`
               <h2 class="date"></h2>
             `:W``}
+          ${this.topCard?W`
+                <div class="top"></div>
+              `:W``}
         ${e&&e.length>0?W`
               <ul class="sidebarMenu">
                 ${e.map((e=>W`
@@ -233,8 +236,8 @@ i.version="2.29.4",s(Jn),i.fn=dr,i.min=ei,i.max=ti,i.now=ni,i.utc=m,i.unix=cr,i.
         flex-direction: column;
         box-sizing: border-box;
         position: fixed;
-        width: 0;
       }
+
       .sidebarMenu {
         list-style: none;
         margin: 20px 0;
@@ -288,15 +291,18 @@ i.version="2.29.4",s(Jn),i.fn=dr,i.min=ei,i.max=ti,i.now=ni,i.utc=m,i.unix=cr,i.
         font-size: 60px;
         line-height: 60px;
         cursor: default;
+        text-align: center;
       }
       h1.digitalClock.with-seconds {
         font-size: 48px;
         line-height: 48px;
         cursor: default;
+        text-align: center;
       }
       h1.digitalClock.with-title {
         margin-bottom: 0;
         cursor: default;
+        text-align: center;
       }
       h2 {
         margin: 0;
