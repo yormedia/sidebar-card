@@ -124,11 +124,11 @@ class SidebarCard extends LitElement {
               <h2 class="date"></h2>
             `
           : html``}
-          ${this.topCard
-            ? html`
-                <div class="top"></div>
-              `
-            : html``}
+        ${this.topCard
+          ? html`
+              <div class="top-card"></div>
+            `
+          : html``}
         ${sidebarMenu && sidebarMenu.length > 0
           ? html`
               <ul class="sidebarMenu">
@@ -160,7 +160,7 @@ class SidebarCard extends LitElement {
           : html``}
         ${this.bottomCard
           ? html`
-              <div class="bottom"></div>
+              <div class="bottom-card"></div>
             `
           : html``}
       </div>
@@ -245,7 +245,7 @@ class SidebarCard extends LitElement {
     const header = root.shadowRoot.querySelector('ch-header') || root.shadowRoot.querySelector('app-header');
     const offParam = getParameterByName('sidebarOff');
     if (sidebarInner) {
-      sidebarInner.style.width = this.offsetWidth + 'px';
+      //sidebarInner.style.width = this.offsetWidth + 'px';
       if(this.config.hideTopMenu) {
         sidebarInner.style.height = `${window.innerHeight}px`;
         sidebarInner.style.top = '0px';
@@ -477,7 +477,7 @@ class SidebarCard extends LitElement {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        position: fixed;
+        //position: fixed;
       }
 
       .sidebarMenu {
@@ -651,12 +651,12 @@ class SidebarCard extends LitElement {
         z-index: 1;
       }
 
-      .top {
+      .top-card {
         display: flex;
         margin-top: auto;
       }
       
-      .bottom {
+      .bottom-card {
         display: flex;
         margin-top: auto;
       }
